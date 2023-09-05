@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import VisibilityContextProvider from "./context/context";
+import IdContextProvider from "./context/idContext";
+import Home from "./components/Home/home";
+import Trips from "./components/Trips/trips";
+import TripDetail from "./components/TripsDetail/tripDetail";
+import NewTripFrom from "./components/NewTripForm/newTripForm";
+import UpdateTripFrom from "./components/UpdateTripForm/updateTripForm";
+import UserRegistration from "./components/UserRegistration/userRegistration";
+import UserLogin from "./components/UserLogin/userLogin";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <VisibilityContextProvider>
+        <Home />
+        <IdContextProvider>
+          <Trips />
+          <TripDetail />
+        </IdContextProvider>
+        <NewTripFrom />
+        <UpdateTripFrom />
+        <UserRegistration />
+        <UserLogin />
+      </VisibilityContextProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
