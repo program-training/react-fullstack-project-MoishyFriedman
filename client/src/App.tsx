@@ -17,9 +17,9 @@ function App() {
         <IdContextProvider>
           <Trips />
           <TripDetail />
+          <UpdateTripFrom />
         </IdContextProvider>
         <NewTripFrom />
-        <UpdateTripFrom />
         <UserRegistration />
         <UserLogin />
       </VisibilityContextProvider>

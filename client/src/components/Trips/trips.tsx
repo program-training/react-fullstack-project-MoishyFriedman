@@ -33,6 +33,14 @@ async function deleteHandler(
 export default function Trips(): JSX.Element | null {
   const [trips, setTrips] = useState<Trip[]>([]);
 
+  const context = useContext(visibilityContext);
+  if (!context) return null;
+  const { visibility, setVisibility } = context;
+
+  const id = useContext(idContext);
+  if (!id) return null;
+  const { setUserId } = id;
+
   useEffect(() => {
     async function getTrips() {
       try {
@@ -46,14 +54,6 @@ export default function Trips(): JSX.Element | null {
     }
     getTrips();
   }, []);
-
-  const context = useContext(visibilityContext);
-  if (!context) return null;
-  const { visibility, setVisibility } = context;
-
-  const id = useContext(idContext);
-  if (!id) return null;
-  const { setUserId } = id;
 
   return (
     <div className={visibility.trips}>

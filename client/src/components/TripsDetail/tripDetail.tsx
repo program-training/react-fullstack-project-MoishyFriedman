@@ -42,30 +42,31 @@ export default function TripDetail(): JSX.Element | null {
 
   return (
     <div className={visibility.tripDetail}>
-      {trip ? <div>{trip.destination}</div> : null}
-      <div id="tripCard" key={trip?.id}>
-        <img src={trip?.image}></img>
-        <h2>{trip?.name}</h2>
-        <h3>{trip?.destination}</h3>
-        <p>{trip?.description}</p>
-        <h4>{trip?.price}$</h4>
-        <p>
-          {trip?.startDate} - {trip?.endDate}
-        </p>
-        <p>{trip?.activities}</p>
-        <span
-          onClick={() =>
-            setVisibility({
-              ...visibility,
-              updateTripForm: "visible",
-              tripDetail: "invisible",
-            })
-          }
-          className="material-symbols-outlined"
-        >
-          edit
-        </span>
-      </div>
+      {trip && (
+        <div id="tripCard" key={trip.id}>
+          <img src={trip.image}></img>
+          <h2>{trip.name}</h2>
+          <h3>{trip.destination}</h3>
+          <p>{trip.description}</p>
+          <h4>{trip.price}$</h4>
+          <p>
+            {trip.startDate} - {trip.endDate}
+          </p>
+          <p>{trip.activities}</p>
+          <span
+            onClick={() =>
+              setVisibility({
+                ...visibility,
+                updateTripForm: "visible",
+                tripDetail: "invisible",
+              })
+            }
+            className="material-symbols-outlined"
+          >
+            edit
+          </span>
+        </div>
+      )}
       <button
         onClick={() =>
           setVisibility({

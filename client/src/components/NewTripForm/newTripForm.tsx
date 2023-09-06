@@ -1,22 +1,27 @@
-import { useContext, useRef } from "react";
+import { useContext, useState } from "react";
 import "../style.css";
 import { visibilityContext } from "../../context/context";
 
 interface Trip {
-  name?: string;
-  destination?: string;
-  startDate?: string;
-  endDate?: string;
-  description?: string;
-  price?: number;
-  image?: string;
-  activities?: string[];
+  name: string;
+  destination: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+  price: number;
+  image: string;
+  activities: string[];
 }
 
-async function submitHandler() {
+async function submitHandler(newTripData: Trip) {
   try {
-    const data = await fetch("http://localhost:3000/api/trips/", {
+    const data = await fetch("http://localhost:3000/api/trips", {
       method: "post",
+      headers: {
+        authorization: "test-token",
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify(newTripData),
     });
     if (!data) throw new Error(`data can't found`);
   } catch (error) {
@@ -25,25 +30,16 @@ async function submitHandler() {
 }
 
 export default function NewTripFrom(): JSX.Element | null {
-  const inputName = useRef<HTMLInputElement>(null);
-  const inputDestination = useRef<HTMLInputElement>(null);
-  const inputStartDate = useRef<HTMLInputElement>(null);
-  const inputEndDate = useRef<HTMLInputElement>(null);
-  const inputDescription = useRef<HTMLInputElement>(null);
-  const inputPrice = useRef<HTMLInputElement>(null);
-  const inputImage = useRef<HTMLInputElement>(null);
-  const inputActivities = useRef<HTMLInputElement>(null);
-
-  const newTrip: Trip = {
-    name: inputName.current?.value,
-    destination: inputDestination.current?.value,
-    startDate: inputStartDate.current?.value,
-    endDate: inputEndDate.current?.value,
-    description: inputDescription.current?.value,
-    price: parseInt(inputPrice.current?.value),
-    image: inputImage.current?.value,
-    activities: [inputActivities.current?.value],
-  };
+  const [newTripData, setNewTripData] = useState<Trip>({
+    name: "",
+    destination: "",
+    startDate: "",
+    endDate: "",
+    description: "",
+    price: 0,
+    image: "",
+    activities: [],
+  });
 
   const context = useContext(visibilityContext);
   if (!context) return null;
@@ -51,42 +47,80 @@ export default function NewTripFrom(): JSX.Element | null {
   return (
     <div className={visibility.newTripForm}>
       <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          submitHandler();
+        onSubmit={() => {
+          submitHandler(newTripData);
         }}
       >
         <label>
           name:
-          <input ref={inputName}></input>
+          <input
+            onChange={(e) => {
+              setNewTripData({ ...newTripData, name: e.target.value });
+            }}
+          ></input>
         </label>
         <label>
           destination:
-          <input ref={inputDestination}></input>
+          <input
+            onChange={(e) => {
+              setNewTripData({ ...newTripData, destination: e.target.value });
+            }}
+          ></input>
         </label>
         <label>
           startDate:
-          <input ref={inputStartDate}></input>
+          <input
+            onChange={(e) => {
+              setNewTripData({ ...newTripData, startDate: e.target.value });
+            }}
+          ></input>
         </label>
         <label>
           endDate:
-          <input ref={inputEndDate}></input>
+          <input
+            onChange={(e) => {
+              setNewTripData({ ...newTripData, endDate: e.target.value });
+            }}
+          ></input>
         </label>
         <label>
           description:
-          <input ref={inputDescription}></input>
+          <input
+            onChange={(e) => {
+              setNewTripData({ ...newTripData, description: e.target.value });
+            }}
+          ></input>
         </label>
         <label>
           price:
-          <input type="number" ref={inputPrice}></input>
+          <input
+            type="number"
+            onChange={(e) => {
+              setNewTripData({
+                ...newTripData,
+                price: parseInt(e.target.value),
+              });
+            }}
+          ></input>
         </label>
         <label>
           image:
-          <input ref={inputImage}></input>
+          <input
+            onChange={(e) => {
+              setNewTripData({ ...newTripData, image: e.target.value });
+            }}
+          ></input>
         </label>
         <label>
           activities:
-          <input ref={inputActivities}></input>
+          <input
+            onChange={(e) => {
+              setNewTripData({
+                ...newTripData,
+                activities: e.target.value.split(", "),
+              });
+            }}
+          ></input>
         </label>
         <button>add new trip</button>
       </form>
