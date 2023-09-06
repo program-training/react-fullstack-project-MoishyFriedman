@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import "../style.css";
 import { visibilityContext } from "../../context/visibilityContext";
 import { idContext } from "../../context/idContext";
-import "./tripsStyle.css";
+// import "./tripsStyle.css";
 
 interface Trip {
   id: string;
@@ -60,6 +60,30 @@ export default function Trips(): JSX.Element | null {
 
   return (
     <div className={visibility.trips}>
+      <nav>
+        <button
+          onClick={() =>
+            setVisibility({
+              ...visibility,
+              home: "visible",
+              trips: "invisible",
+            })
+          }
+        >
+          Home page
+        </button>
+        <button
+          onClick={() =>
+            setVisibility({
+              ...visibility,
+              trips: "invisible",
+              newTripForm: "visible",
+            })
+          }
+        >
+          add new trip
+        </button>
+      </nav>
       {trips.map((trip) => (
         <div
           onClick={() => {
@@ -72,11 +96,12 @@ export default function Trips(): JSX.Element | null {
           }}
           id="card"
           key={trip.id}
+          className="card h-100 "
         >
-          <img src={trip.image}></img>
-          <h2>{trip.name}</h2>
-          <h3>{trip.destination}</h3>
-          <p>
+          <img className="card-img-top" src={trip.image}></img>
+          <h2 className="card-title ">{trip.name}</h2>
+          <h3 className="card-modal-title ">{trip.destination}</h3>
+          <p className="card-text">
             {trip.startDate} - {trip.endDate}
           </p>
           <div>
@@ -92,24 +117,6 @@ export default function Trips(): JSX.Element | null {
           </div>
         </div>
       ))}
-      <button
-        onClick={() =>
-          setVisibility({ ...visibility, home: "visible", trips: "invisible" })
-        }
-      >
-        Home page
-      </button>
-      <button
-        onClick={() =>
-          setVisibility({
-            ...visibility,
-            trips: "invisible",
-            newTripForm: "visible",
-          })
-        }
-      >
-        add new trip
-      </button>
     </div>
   );
 }

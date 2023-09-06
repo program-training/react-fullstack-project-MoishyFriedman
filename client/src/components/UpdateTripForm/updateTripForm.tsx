@@ -68,59 +68,85 @@ export default function UpdateTripFrom(): JSX.Element | null {
 
   return (
     <div className={visibility.updateTripForm}>
+      <nav>
+        <button
+          onClick={() => {
+            setVisibility({
+              ...visibility,
+              updateTripForm: "invisible",
+              trips: "visible",
+            });
+          }}
+        >
+          trips page
+        </button>
+      </nav>
+      <h1>update trip</h1>
       <form
+        className="card h-100 "
         onSubmit={() => {
           submitHandler(updateTrip, userId);
         }}
       >
-        <label>
+        <label className="form-label">
           name:
           <input
+            type="text"
+            className="form-control"
             value={updateTrip.name}
             onChange={(e) => {
               setUpdateTrip({ ...updateTrip, name: e.target.value });
             }}
           ></input>
         </label>
-        <label>
+        <label className="form-label">
           destination:
           <input
+            type="text"
+            className="form-control"
             value={updateTrip.destination}
             onChange={(e) => {
               setUpdateTrip({ ...updateTrip, destination: e.target.value });
             }}
           ></input>
         </label>
-        <label>
+        <label className="form-label">
           startDate:
           <input
+            type="date"
+            className="form-control"
             value={updateTrip.startDate}
             onChange={(e) => {
               setUpdateTrip({ ...updateTrip, startDate: e.target.value });
             }}
           ></input>
         </label>
-        <label>
+        <label className="form-label">
           endDate:
           <input
+            type="date"
+            className="form-control"
             value={updateTrip.endDate}
             onChange={(e) => {
               setUpdateTrip({ ...updateTrip, endDate: e.target.value });
             }}
           ></input>
         </label>
-        <label>
+        <label className="form-label">
           description:
           <input
+            type="text"
+            className="form-control"
             value={updateTrip.description}
             onChange={(e) => {
               setUpdateTrip({ ...updateTrip, description: e.target.value });
             }}
           ></input>
         </label>
-        <label>
+        <label className="form-label">
           price:
           <input
+            className="form-control"
             value={updateTrip.price}
             type="number"
             onChange={(e) => {
@@ -131,18 +157,22 @@ export default function UpdateTripFrom(): JSX.Element | null {
             }}
           ></input>
         </label>
-        <label>
+        <label className="form-label">
           image:
           <input
+            type="text"
+            className="form-control"
             value={updateTrip.image}
             onChange={(e) => {
               setUpdateTrip({ ...updateTrip, image: e.target.value });
             }}
           ></input>
         </label>
-        <label>
+        <label className="form-label">
           activities:
           <input
+            type="text"
+            className="form-control"
             value={updateTrip.activities}
             onChange={(e) => {
               setUpdateTrip({
@@ -154,17 +184,6 @@ export default function UpdateTripFrom(): JSX.Element | null {
         </label>
         <button>update trip</button>
       </form>
-      <button
-        onClick={() => {
-          setVisibility({
-            ...visibility,
-            updateTripForm: "invisible",
-            trips: "visible",
-          });
-        }}
-      >
-        trips page
-      </button>
     </div>
   );
 }

@@ -49,54 +49,80 @@ export default function NewTripFrom(): JSX.Element | null {
   const { visibility, setVisibility } = context;
   return (
     <div className={visibility.newTripForm}>
+      <nav>
+        <button
+          onClick={() =>
+            setVisibility({
+              ...visibility,
+              newTripForm: "invisible",
+              trips: "visible",
+            })
+          }
+        >
+          trips page
+        </button>
+      </nav>
+      <h1>new trip</h1>
       <form
+        className="card h-100 "
         onSubmit={() => {
           submitHandler(newTripData);
         }}
       >
-        <label>
+        <label className="form-label">
           name:
           <input
+            type="text"
+            className="form-control"
             onChange={(e) => {
               setNewTripData({ ...newTripData, name: e.target.value });
             }}
           ></input>
         </label>
-        <label>
+        <label className="form-label">
           destination:
           <input
+            type="text"
+            className="form-control"
             onChange={(e) => {
               setNewTripData({ ...newTripData, destination: e.target.value });
             }}
           ></input>
         </label>
-        <label>
+        <label className="form-label">
           startDate:
           <input
+            type="date"
+            className="form-control"
             onChange={(e) => {
               setNewTripData({ ...newTripData, startDate: e.target.value });
             }}
           ></input>
         </label>
-        <label>
+        <label className="form-label">
           endDate:
           <input
+            type="date"
+            className="form-control"
             onChange={(e) => {
               setNewTripData({ ...newTripData, endDate: e.target.value });
             }}
           ></input>
         </label>
-        <label>
+        <label className="form-label">
           description:
           <input
+            type="text"
+            className="form-control"
             onChange={(e) => {
               setNewTripData({ ...newTripData, description: e.target.value });
             }}
           ></input>
         </label>
-        <label>
+        <label className="form-label">
           price:
           <input
+            className="form-control"
             type="number"
             onChange={(e) => {
               setNewTripData({
@@ -106,17 +132,21 @@ export default function NewTripFrom(): JSX.Element | null {
             }}
           ></input>
         </label>
-        <label>
+        <label className="form-label">
           image:
           <input
+            type="text"
+            className="form-control"
             onChange={(e) => {
               setNewTripData({ ...newTripData, image: e.target.value });
             }}
           ></input>
         </label>
-        <label>
+        <label className="form-label">
           activities:
           <input
+            type="text"
+            className="form-control"
             onChange={(e) => {
               setNewTripData({
                 ...newTripData,
@@ -127,17 +157,6 @@ export default function NewTripFrom(): JSX.Element | null {
         </label>
         <button>add new trip</button>
       </form>
-      <button
-        onClick={() =>
-          setVisibility({
-            ...visibility,
-            newTripForm: "invisible",
-            trips: "visible",
-          })
-        }
-      >
-        trips page
-      </button>
     </div>
   );
 }

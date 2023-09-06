@@ -42,9 +42,26 @@ export default function TripDetail(): JSX.Element | null {
 
   return (
     <div className={visibility.tripDetail}>
+      <nav>
+        <button
+          onClick={() =>
+            setVisibility({
+              ...visibility,
+              tripDetail: "invisible",
+              trips: "visible",
+            })
+          }
+        >
+          trips page
+        </button>
+      </nav>
       {trip && (
-        <div id="tripCard" key={trip.id}>
-          <img src={trip.image}></img>
+        <div className="card h-100 " key={trip.id}>
+          <img
+            className="card-img-top-100 
+          "
+            src={trip.image}
+          ></img>
           <h2>{trip.name}</h2>
           <h3>{trip.destination}</h3>
           <p>{trip.description}</p>
@@ -67,17 +84,6 @@ export default function TripDetail(): JSX.Element | null {
           </span>
         </div>
       )}
-      <button
-        onClick={() =>
-          setVisibility({
-            ...visibility,
-            tripDetail: "visible",
-            trips: "visible",
-          })
-        }
-      >
-        trips page
-      </button>
     </div>
   );
 }
