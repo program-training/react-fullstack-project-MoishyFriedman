@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import "../style.css";
-import { visibilityContext } from "../../context/context";
+import { visibilityContext } from "../../context/visibilityContext";
 
 interface User {
   email: string;
@@ -12,12 +12,16 @@ async function handlerSubmit(user: User) {
     const data = await fetch("http://localhost:3000/api/auth/login", {
       method: "post",
       headers: {
-        authorization: "test-token",
         "content-Type": "application/json",
       },
       body: JSON.stringify(user),
     });
     if (!data) throw new Error(`data can't found`);
+    const response = await data.json();
+    localStorage.setItem(
+      "tokensList",
+      JSON.stringify(response.responseObj.token)
+    );
   } catch (error) {
     console.log(error);
   }
@@ -32,6 +36,7 @@ export default function UserLogin(): JSX.Element | null {
   const context = useContext(visibilityContext);
   if (!context) return null;
   const { visibility, setVisibility } = context;
+
   return (
     <div className={visibility.userLogin}>
       <form

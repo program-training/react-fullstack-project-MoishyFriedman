@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import "../style.css";
-import { visibilityContext } from "../../context/context";
+import { visibilityContext } from "../../context/visibilityContext";
 
 export default function Home(): JSX.Element | null {
   const context = useContext(visibilityContext);

@@ -1,5 +1,5 @@
 import "./App.css";
-import VisibilityContextProvider from "./context/context";
+import VisibilityContextProvider from "./context/visibilityContext";
 import IdContextProvider from "./context/idContext";
 import Home from "./components/Home/home";
 import Trips from "./components/Trips/trips";

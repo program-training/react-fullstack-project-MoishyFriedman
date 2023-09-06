@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import "../style.css";
-import { visibilityContext } from "../../context/context";
+import { visibilityContext } from "../../context/visibilityContext";
 
 interface Trip {
   name: string;
@@ -15,10 +15,13 @@ interface Trip {
 
 async function submitHandler(newTripData: Trip) {
   try {
+    const token: string = JSON.parse(
+      localStorage.getItem("tokensList") as string
+    );
     const data = await fetch("http://localhost:3000/api/trips", {
       method: "post",
       headers: {
-        authorization: "test-token",
+        authorization: token,
         "content-Type": "application/json",
       },
       body: JSON.stringify(newTripData),

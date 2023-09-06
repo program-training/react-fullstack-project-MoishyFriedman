@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import "../style.css";
-import { visibilityContext } from "../../context/context";
+import { visibilityContext } from "../../context/visibilityContext";
 import { idContext } from "../../context/idContext";
 
 interface Trip {

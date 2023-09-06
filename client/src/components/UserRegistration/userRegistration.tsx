@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import "../style.css";
-import { visibilityContext } from "../../context/context";
+import { visibilityContext } from "../../context/visibilityContext";
 
 interface User {
   email: string;
@@ -12,7 +12,6 @@ async function handlerSubmit(user: User) {
     const data = await fetch("http://localhost:3000/api/auth/register", {
       method: "post",
       headers: {
-        authorization: "test-token",
         "content-Type": "application/json",
       },
       body: JSON.stringify(user),
