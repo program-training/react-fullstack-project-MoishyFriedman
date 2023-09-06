@@ -1,12 +1,12 @@
-import { Request, Response } from 'express';
+import { Request, Response } from "express";
 import {
   getAllTrips,
   getTripById,
   createTrip,
   updateTrip,
   deleteTrip,
-} from '../utils/trips';
-import { Trip } from '../models/trip';
+} from "../utils/trips";
+import { Trip } from "../models/trip";
 
 // Get all trips
 export const getAllTripsController = (req: Request, res: Response) => {
@@ -17,11 +17,11 @@ export const getAllTripsController = (req: Request, res: Response) => {
 // Get a trip by ID
 export const getTripByIdController = (req: Request, res: Response) => {
   const tripId: string = req.params.id;
-  
+
   const trip = getTripById(tripId);
 
   if (!trip) {
-    return res.status(404).json({ error: 'Trip not found' });
+    return res.status(404).json({ error: "Trip not found" });
   }
 
   res.json(trip);
@@ -33,7 +33,7 @@ export const createTripController = (req: Request, res: Response) => {
   console.log(newTrip);
   const createdTrip = createTrip(newTrip);
   console.log(createdTrip);
-  
+
   res.status(201).json(createdTrip);
 };
 
@@ -46,7 +46,7 @@ export const updateTripController = (req: Request, res: Response) => {
   const updatedTrip = updateTrip(updatedTripData);
 
   if (!updatedTrip) {
-    return res.status(404).json({ error: 'Trip not found' });
+    return res.status(404).json({ error: "Trip not found" });
   }
 
   res.json(updatedTrip);
@@ -58,7 +58,7 @@ export const deleteTripController = (req: Request, res: Response) => {
   const deletedTrip = deleteTrip(tripId);
 
   if (!deletedTrip) {
-    return res.status(404).json({ error: 'Trip not found' });
+    return res.status(404).json({ error: "Trip not found" });
   }
 
   res.json(deletedTrip);
