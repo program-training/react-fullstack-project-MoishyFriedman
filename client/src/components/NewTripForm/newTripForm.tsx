@@ -15,9 +15,7 @@ interface Trip {
 
 async function submitHandler(newTripData: Trip) {
   try {
-    const token: string = JSON.parse(
-      localStorage.getItem("tokensList") as string
-    );
+    const token: string = JSON.parse(localStorage.getItem("token") as string);
     const data = await fetch("http://localhost:3000/api/trips", {
       method: "post",
       headers: {

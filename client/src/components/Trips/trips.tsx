@@ -2,7 +2,6 @@ import { useContext, useState, useEffect } from "react";
 import "../style.css";
 import { visibilityContext } from "../../context/visibilityContext";
 import { idContext } from "../../context/idContext";
-// import "./tripsStyle.css";
 
 interface Trip {
   id: string;
@@ -18,9 +17,7 @@ async function deleteHandler(
   setTrips: React.Dispatch<React.SetStateAction<Trip[]>>
 ) {
   try {
-    const token: string = JSON.parse(
-      localStorage.getItem("tokensList") as string
-    );
+    const token: string = JSON.parse(localStorage.getItem("token") as string);
     const data = await fetch("http://localhost:3000/api/trips/" + id, {
       method: "delete",
       headers: { authorization: token },
